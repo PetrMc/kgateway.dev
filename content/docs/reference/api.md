@@ -274,7 +274,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `type` _[AwsAuthType](#awsauthtype)_ | Type specifies the authentication method to use for the backend. |  | Enum: [Secret IRSA] <br />Required <br /> |
+| `type` _[AwsAuthType](#awsauthtype)_ | Type specifies the authentication method to use for the backend. |  | Enum: [Secret] <br />Required <br /> |
 | `secret` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v/#localobjectreference-v1-core)_ | Secret references a Kubernetes Secret containing the AWS credentials.<br />The Secret must have keys "accessKey", "secretKey", and optionally "sessionToken". |  | Optional <br /> |
 
 
@@ -292,7 +292,6 @@ _Appears in:_
 | Field | Description |
 | --- | --- |
 | `Secret` | AwsAuthTypeSecret uses credentials stored in a Kubernetes Secret.<br /> |
-| `IRSA` | AwsAuthTypeIRSA uses pod identity (IRSA) to obtain credentials.<br /> |
 
 
 #### AwsBackend
@@ -932,6 +931,23 @@ _Appears in:_
 | `header` _[HTTPHeaderMatch](#httpheadermatch)_ |  |  | Required <br /> |
 
 
+#### HeaderName
+
+_Underlying type:_ _string_
+
+EnvoyHeaderName is the name of a header or pseudo header
+Based on gateway api v1.Headername but allows a singular : at the start
+
+_Validation:_
+- MaxLength: 256
+- MinLength: 1
+- Pattern: `^:?[A-Za-z0-9!#$%&'*+\-.^_\x60|~]+$`
+
+_Appears in:_
+- [HeaderTransformation](#headertransformation)
+
+
+
 #### HeaderTransformation
 
 
@@ -945,7 +961,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `name` _[HeaderName](#headername)_ | Name is the name of the header to interact with. |  | MaxLength: 256 <br />MinLength: 1 <br />Pattern: `^[A-Za-z0-9!#$%&'*+\-.^_\x60\|~]+$` <br /> |
+| `name` _[HeaderName](#headername)_ | Name is the name of the header to interact with. |  | MaxLength: 256 <br />MinLength: 1 <br />Pattern: `^:?[A-Za-z0-9!#$%&'*+\-.^_\x60\|~]+$` <br /> |
 | `value` _[InjaTemplate](#injatemplate)_ | Value is the template to apply to generate the output value for the header. |  |  |
 
 
