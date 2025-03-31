@@ -13,7 +13,7 @@
 4. Install {{< reuse "docs/snippets/product-name.md" >}} by using Helm.
 
    ```sh
-   helm upgrade -i --namespace {{< reuse "docs/snippets/ns-system.md" >}} --version v{{< reuse "docs/versions/n-patch.md" >}} kgateway oci://cr.kgateway.dev/kgateway-dev/charts/kgateway
+   helm upgrade -i  --create-namespace --namespace {{< reuse "docs/snippets/ns-system.md" >}} --version v{{< reuse "docs/versions/n-patch.md" >}} kgateway oci://cr.kgateway.dev/kgateway-dev/charts/kgateway
    ```
 
 5. Make sure that `kgateway` is running.
